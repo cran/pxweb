@@ -115,6 +115,15 @@ findData.inputBaseCat <- function(alt, codedAlt) {
   return(str_join(output,")", sep=""))
 }
 
+
+
+#' Get input that is consistent with 
+#'
+#' @param type type of input to get.
+#' @param input data.frame with input data to use with 
+#' @param test_input input for test cases
+#' @param silent no output
+#'
 findData.input <- function(type, input = NULL, test_input = character(0), silent = FALSE){
   # If silent sink output
   if(silent){
@@ -169,10 +178,39 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
       str_join("\nChoose your alternative(s) by number:",
                "\nSeparate multiple choices by ',' and intervals by ':'", sep="")
   }
+  
+  if (type == "db") {
+    baseCat <- c(1)    
+    toprint <- data.frame(id=1:nrow(input), text = input$text)
+    alt <- rownames(toprint)
+    max_cat <- 1
+    
+    textTitle <- str_join("\nCHOOSE DATABASE:\n",
+                          str_join(
+                            rep("=", round(getOption("width")*0.9)), collapse = ""), 
+                          "\n", sep="")
+    textHead <-
+      str_join("\nChoose database by number:", sep="")
+  }
+
+  if (type == "api") {
+    baseCat <- c(1)    
+    toprint <- data.frame(id=input[,1], text = input[,2])
+    alt <- rownames(toprint)
+    max_cat <- 1
+    
+    textTitle <- str_join("\nCHOOSE API:\n",
+                          str_join(
+                            rep("=", round(getOption("width")*0.9)), collapse = ""), 
+                          "\n", sep="")
+    textHead <-
+      str_join("\nChoose api by number:", sep="")
+  }
+  
 
   inputOK <- FALSE
   inputScan <- ""
-  
+
   
   while(!inputOK) {
     # Print title, alternatives and so forth
@@ -185,6 +223,9 @@ findData.input <- function(type, input = NULL, test_input = character(0), silent
       }
       findData.printNode(xscb = toprint, print = TRUE)
     }
+    if (type == "db" | type == "api") {
+      findData.printNode(xscb = toprint, print = TRUE)
+    }    
     cat(textHead)
     if (type != "text") {
       cat(findData.inputBaseCat(baseCat, codedAlt), "\n")
@@ -371,5 +412,55 @@ findData.inputConvert <- function(input, max_value=NA) {
 
 
 
+#' Calculate a specific database to get data from
+#' 
+#' @param baseURL The basic url to the pxweb api
+#' @param pre_choice Predifined choice of database
+#' 
+#' @return base url to the specific data base
+#' 
+choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
+  data_bases <- get_pxweb_metadata(baseURL = baseURL) 
+  if(nrow(data_bases) == 1){
+    return(paste0(baseURL, "/", text_to_url(data_bases$dbid)))
+  } else if(is.null(pre_choice)) {
+    db_choice <- as.numeric(findData.input(type = "db", input = data_bases))
+    return(paste0(baseURL, "/", text_to_url(data_bases$dbid[db_choice])))
+  } else if(!is.null(pre_choice)){
+    return(paste0(baseURL, "/", text_to_url(data_bases$dbid[pre_choice])))
+  }
+} 
 
+
+#' Choose an api from api_catalogue
+#' 
+#' @return base url to the specific data base
+#' 
+choose_pxweb_api <- function(){
+  res <- character(3)
+  apis <- api_catalogue()
+  api_df <- data.frame(api_names = unlist(lapply(apis, FUN=function(X) X$api)),
+                       text = unlist(lapply(apis, FUN=function(X) X$description)))
+
+  api_choice <- as.numeric(findData.input(type = "api", input = api_df))
+  res[1] <- apis[[api_choice]]$api
+  i <- 1
+  for(type in c("languages", "versions")){
+    i <- i + 1
+    if(type == "languages") vec <- apis[[api_choice]]$languages
+    if(type == "versions") vec <- apis[[api_choice]]$versions
+
+    if(length(vec) > 1) {
+      choice <- 
+        as.numeric(findData.input(type = "api",
+                                  input = data.frame(id = 1:length(vec),
+                                                     text = vec)))
+      choice <- vec[choice]
+    } else {
+      choice <- vec
+    }
+    res[i] <- choice
+  }
+  return(res)
+} 
 

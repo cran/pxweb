@@ -26,7 +26,7 @@
 get_pxweb_data <- function(url, dims, clean = FALSE) {
 
    dimNames <- names(dims)
-   batches <- create_batch_list(url, dims)
+   batches <- create_batch_list(url = url, dims = dims)
    content_node <- batches$content_node
    b_list <- list()
    
@@ -34,7 +34,8 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
 
      queryBody <- list()
      
-     # print("Define the query list")
+     # print("Define the query list") 
+     # batch_no <- i <- 1
      for (i in 1:length(batches$dims[[batch_no]])) {
         if (length(batches$dims[[batch_no]] [[dimNames[i]]]) == 1) {
            filter = ifelse(batches$dims[[batch_no]] [[dimNames[i]]] == "*", "all", "item")
@@ -54,7 +55,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(
-           query = queryBody,
+           query = rapply(queryBody, iconv, to = "UTF-8", how = "replace"),
   	 # NOTE: JSON might be more efficient for downloads (smaller file size)
      # NOTE: JSON includes comments/metadata
            response = list(format = "csv")

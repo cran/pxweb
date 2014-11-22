@@ -5,10 +5,22 @@
 #' @param url Get parameters for the api with this url (NULL = get all API configs)
 #' @export
 #' @examples api_parameters()
-api_parameters <- function(url=NULL) {
-  api.file <- system.file("extdata/api.json", package = "pxweb")
-  api.list <- RJSONIO::fromJSON(api.file)
-  if(!is.null(url)) api.list <- api.list[str_split(url, "/")[[1]][3]]
+api_parameters <- function(url = NULL) {
+
+  warning("api_parameters() is depricated, please use api_catalogue()")
+  
+  api.list <- get_api_list()
+  
+  # If API is specified, pick the parameters
+  if(!is.null(url)) {
+    api_url_base <- unlist(lapply(api.list, function(X) strsplit(X$url, split = "/")[[1]][3]))
+    url_base <- strsplit(url, split = "/")[[1]][3]
+    if (!url_base %in% api_url_base) {
+      stop(paste0(url_base, "api does not exist in api cataloge."))
+    } else {
+      api.list <- api.list[which(api_url_base %in% url_base)[1]]
+    }
+  }
   class(api.list) <- "api_parameters"
   return(api.list)
 }
