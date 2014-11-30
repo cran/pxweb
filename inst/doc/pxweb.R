@@ -10,7 +10,7 @@ library(pxweb)
 
 ## ----apiparameters, message=FALSE, eval=TRUE-----------------------------
 library(pxweb)
-print(api_catalogue()[1:2])
+api_catalogue()
 
 ## ----standardquery, message=FALSE, eval=FALSE----------------------------
 #  # Get data from SCB (Statistics Sweden)
