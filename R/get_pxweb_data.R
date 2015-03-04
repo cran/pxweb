@@ -16,7 +16,7 @@
 #' 
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' test_data <- 
 #'   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
 #'                  dims = list(ContentsCode = c('PR0101A1'), Tid = c('*')),
@@ -55,7 +55,7 @@ get_pxweb_data <- function(url, dims, clean = FALSE) {
      response <- try(POST(
         url = batches$url,
         body = toJSON(list(
-           query = rapply(queryBody, iconv, to = "UTF-8", how = "replace"),
+           query = rapply(queryBody, enc2utf8, how = "replace"),
   	 # NOTE: JSON might be more efficient for downloads (smaller file size)
      # NOTE: JSON includes comments/metadata
            response = list(format = "csv")

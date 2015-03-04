@@ -94,10 +94,10 @@ test_that(desc="get_pxweb_data()",{
     
     list(
       url = "http://pxnet2.stat.fi/PXWeb/api/v1/fi/StatFin/asu/asas/010_asas_tau_101.px",
-      dims = list("Alue" = c("*"),
+      dims = list(Alue = c("*"),
                   "Asuntokunnan koko" = c("*"),
-                  "Talotyyppi" = c("S"),
-                  "Vuosi" = c("*")
+                  Talotyyppi = c("S"),
+                  Vuosi = c("*")
       ),
       clean = TRUE,
       test_dim = c(2568, NA)
@@ -131,8 +131,8 @@ test_that(desc="get_pxweb_data()",{
   
   
   for (test in api_tests_get_pxweb_data){
-    if(test$url == "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014") {
-      skip("Known error: comma bug in csv files")}
+#    if(test$url == "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014") {
+#      skip("Known error: comma bug in csv files")}
 
     expect_that({
       test_data <- 

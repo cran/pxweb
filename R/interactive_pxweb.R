@@ -14,10 +14,9 @@
 #' @export
 #' @examples
 #'  api_catalogue() # List apis
-#' \donttest{
+#' \dontrun{
 #'  d <- interactive_pxweb()
 #'  d <- interactive_pxweb("api.scb.se")
-#'  d <- interactive_pxweb(api = "statistik.sjv.se")
 #'  d <- interactive_pxweb("api.scb.se", language = "sv")
 #' }
 
