@@ -2,8 +2,8 @@
 #  install.packages("pxweb")
 
 ## ----install2, eval=FALSE------------------------------------------------
-#  install.packages("devtools")
-#  devtools::install_github("pxweb","rOpenGov")
+#  library("devtools")
+#  devtools::install_github("ropengov/pxweb")
 
 ## ----test, message=FALSE, warning=FALSE, eval=TRUE-----------------------
 library(pxweb)
