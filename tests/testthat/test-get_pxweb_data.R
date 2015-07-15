@@ -86,7 +86,7 @@ test_that(desc="get_pxweb_data()",{
     list( 
       url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/ME/ME0104/ME0104C/ME0104T3",
       dims = list(Region = c('*'),
-                  Partimm = c('M','C','FP','KD','MP','S','V','SD','ÖVRIGA'),
+                  Partimm = c('M','C','FP','KD','MP','S','V','SD','\u00D6VRIGA'),
                   ContentsCode = c('ME0104B7'),
                   Tid = c('2010')),
       clean = TRUE,
@@ -117,13 +117,13 @@ test_that(desc="get_pxweb_data()",{
       ),
       clean = TRUE
     ),
-    
-    list( 
-      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2014",
+
+    list(
+      url = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0401/BE0401A/BefolkprognRev2015",
       dims = list(Alder = c('0', '1', '2', '3', '4'),
                   Kon = c('1', '2'),
-                  ContentsCode = c('BE0401AW'),
-                  Tid = c('2014', '2015', '2016', '2017', '2018')),
+                  ContentsCode = c('0000008J'),
+                  Tid = c('2015', '2016', '2017', '2018', '2019')),
       clean = FALSE,
       test_dim = c(NA, NA))  
     
@@ -160,4 +160,48 @@ test_that(desc="Test warnings",{
                      dims = test_dims,
                      clean = TRUE)}, 
     not(gives_warning()))
+})
+
+
+test_that(desc="Previous bug identified by Erik Bulow (#84 at github)",{  
+  
+  skip_on_travis()
+  
+  test_dims <-
+    structure(
+      list(
+        Civilstand = "*", ContentsCode = "BE0101N1", Alder = c(
+          "0",
+          "1", "10", "11", "12", "14", "15", "16", "18", "19", "2", "20",
+          "21", "22", "23", "24", "25", "26", "27", "28", "29", "3", "30",
+          "31", "32", "33", "34", "35", "36", "37", "38", "39", "4", "40",
+          "41", "42", "43", "44", "45", "46", "47", "48", "49", "5", "50",
+          "51", "52", "53", "54", "55", "56", "57", "58", "59", "6", "60",
+          "61", "62", "63", "64", "65", "66", "67", "68", "69", "7", "70",
+          "71", "72", "73", "74", "75", "76", "77", "78", "79", "8", "80",
+          "81", "82", "84", "85", "9"
+        ), Kon = c("1", "2"), Tid = c(
+          "2005",
+          "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013",
+          "2014"
+        ), Region = c(
+          "1382", "1383", "1384", "1401", "1402", "1407",
+          "1415", "1419", "1421", "1427", "1430", "1435", "1438", "1439",
+          "1440", "1441", "1442", "1443", "1444", "1445", "1446", "1447",
+          "1452", "1460", "1461", "1462", "1463", "1465", "1466", "1470",
+          "1471", "1472", "1473", "1480", "1481", "1482", "1484", "1485",
+          "1486", "1487", "1488", "1489", "1490", "1491", "1492", "1493",
+          "1494", "1495", "1496", "1497", "1498", "1499"
+        )
+      ), .Names = c("Civilstand",
+                    "ContentsCode", "Alder", "Kon", "Tid", "Region")
+    )  
+  
+  expect_that({
+    test_url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
+    test_data <- 
+      get_pxweb_data(url = test_url,
+                     dims = test_dims,
+                     clean = TRUE)}, 
+    not(throws_error()))
 })
