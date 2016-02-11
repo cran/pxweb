@@ -7,6 +7,7 @@
 #' @param test_input Vector of length 4 to test inputs to the first 4 questions in the query.
 #' @param ... further parameters. These are currently ignored.
 #' 
+#' @keywords internal 
 #' 
 download_pxweb <- function(dataNode, test_input = NULL, ...) {
   # Assertions
@@ -75,9 +76,9 @@ download_pxweb <- function(dataNode, test_input = NULL, ...) {
     # Save the alternative to use to download data 
     varList[[listElem$code]] <- tempAlt    
     varListText <- c(varListText,
-                     str_c(ifelse(grepl(" ", listElem$code), 
-                                  str_c("\"", listElem$code, "\"", collapse=""), 
-                                  listElem$code),
+                     str_c(ifelse(make.names(listElem$code) == listElem$code, 
+                                  listElem$code,
+                                  str_c("\"", listElem$code, "\"", collapse="")),
                            " = c('",
                            str_c(tempAlt, collapse="', '"),
                            "')", 
@@ -125,6 +126,8 @@ findData.inputBaseCat <- function(alt, codedAlt) {
 #' @param input data.frame with input data to use with 
 #' @param test_input input for test cases
 #' @param silent no output
+#' 
+#' @keywords internal 
 #'
 findData.input <- function(type, input = NULL, test_input = character(0), silent = FALSE){
   # If silent sink output
@@ -421,6 +424,8 @@ findData.inputConvert <- function(input, max_value=NA) {
 #' 
 #' @return base url to the specific data base
 #' 
+#' @keywords internal 
+#' 
 choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
   data_bases <- get_pxweb_metadata(baseURL = baseURL) 
   if(nrow(data_bases) == 1){
@@ -435,6 +440,8 @@ choose_pxweb_database_url <- function(baseURL, pre_choice = NULL){
 
 
 #' Choose an api from api_catalogue
+#' 
+#' @keywords internal 
 #' 
 #' @return base url to the specific data base
 #' 
