@@ -12,4 +12,3 @@ Download and update the PXWEB API catalogue
 \details{
 Downloads the latest api catalogue from github.
 }
-

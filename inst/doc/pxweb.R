@@ -22,13 +22,26 @@ library(pxweb)
 #  d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 #  
 #  # Fetching data from statfi (Statistics Finland)
-#  d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+#  d <- interactive_pxweb(api = "pxnet2.stat.fi")
+#  
+#  # Fetching data from StatBank (Statistics Norway)
+#  d <- interactive_pxweb(api = "data.ssb.no")
 
 ## ----directquery, message=FALSE, eval=FALSE------------------------------
 #  pxweb_test_data <-
 #    get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet",
 #                   dims = list(ContentsCode = c('PR0101A1'),
 #                               Tid = c('*')),
+#                   clean = FALSE)
+
+## ----directquery-ssb, message=FALSE, eval=FALSE--------------------------
+#  pxweb_test_data_ssb <-
+#    get_pxweb_data(url = "http://data.ssb.no/api/v0/en/table/vf/vf01/aksjer/ASKapital",
+#                   dims = list(
+#                     NACE2007 = c('A_U'),
+#                     ContentsCode = c('ASer'),
+#                     Tid = c('*')
+#                   ),
 #                   clean = FALSE)
 
 ## ----citation, message=FALSE, eval=TRUE----------------------------------

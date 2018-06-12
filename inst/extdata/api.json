@@ -74,6 +74,17 @@
         "period_in_seconds": 1,
         "max_values_to_download" : 10000
               },
+ 
+    "prognos.konj.se": {
+                "alias" : ["konjforcast"],
+                "description" : "The Swedish national institute of economic research, forecast database",
+                "url" : "http://prognos.konj.se/PXWeb/api/[version]/[lang]",
+                "versions" : ["v1"], 
+                "languages" : ["sv"],
+                "calls_per_period" :  30,
+                "period_in_seconds" : 10,
+                "max_values_to_download" : 10000
+    },
     
     "statdb.luke.fi": {
         "alias" : ["luke"],
@@ -172,8 +183,52 @@
         "calls_per_period": 30,
         "period_in_seconds": 10,
         "max_values_to_download" : 100000
-     }
+    },
+    
+    "data.ssb.no": { 
+        "alias" : ["ssb"],
+        "description" : "Statistics Norway",
+        "url" : "http://data.ssb.no/api/[version]/[lang]",
+        "version": ["v0"], 
+        "lang": ["en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+    },
 
+    "pxweb.asub.ax": {
+        "alias" : ["asub"],
+        "description" : "Statistics Aland",
+        "url" : "http://pxweb.asub.ax/PXWeb/api/[version]/[lang]/",
+        "version": ["v1"], 
+        "lang": ["sv","en"],
+        "calls_per_period": 30,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 100000
+    },
+
+    "makstat.stat.gov.mk": {
+      "alias" : ["makstat"],
+      "description" : "State Statistical Office of the Republic of Macedonia",
+      "url" : "http://makstat.stat.gov.mk/PXWeb/api/[version]/[lang]/MakStat/",
+      "version": ["v1"], 
+      "lang": ["en", "mk"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+    },
+    
+    "data.csb.gov.lv": {
+      "alias" : ["csb_lv"],
+      "description" : "Statistics Latvia",
+      "url" : "http://data.csb.gov.lv/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "lv"],
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+    }
+ 
   },
 
   "local_apis": {}

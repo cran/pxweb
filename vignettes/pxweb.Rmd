@@ -1,19 +1,23 @@
 ---
 title: "PX-WEB API Interface for R"
-author: "Mans Magnusson and Leo Lahti"
+author: "Mans Magnusson, Leo Lahti et al."
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  - rmarkdown::html_vignette
+  - rmarkdown::md_vignette  
 vignette: >
   %\VignetteIndexEntry{pxweb}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}  
 ---
+
 
 This R package provides tools to access [PX-WEB
 API](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf). Your
 [contributions](http://ropengov.github.io/contribute/) and [bug
 reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
+
 
 More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf).
 
@@ -26,9 +30,9 @@ More information on the PX-Web/PC-Axis API can be found [here](http://www.scb.se
 
 [A number of organizations](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/) use to distribute hierarchical data. You can browse the available data sets at:
 
-* [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
-* [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
-* [Other organizations using PX-WEB](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
+ * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](http://www.scb.se/Grupp/OmSCB/API/API-description.pdf)
+ * [Statistics Finland](http://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](http://pxnet2.stat.fi/api1.html)
+ * [Other organizations using PX-WEB](http://www.scb.se/sv_/PC-Axis/Programs/PX-Web/PX-Web-examples/)
 
 ## <a name="installation"></a>Installation
 
@@ -38,6 +42,7 @@ Install the stable release version in R:
 ```{r install1, eval=FALSE}
 install.packages("pxweb")
 ```
+
 
 Install the latest version from github:
 
@@ -85,7 +90,10 @@ d <- interactive_pxweb(api = "api.scb.se")
 d <- interactive_pxweb(api = "api.scb.se", version = "v1", lang = "sv")
 
 # Fetching data from statfi (Statistics Finland)
-d <- interactive_pxweb(api = "pxwebapi2.stat.fi")
+d <- interactive_pxweb(api = "pxnet2.stat.fi")
+
+# Fetching data from StatBank (Statistics Norway)
+d <- interactive_pxweb(api = "data.ssb.no")
 ```
 
 Example of download data from the Statistics Sweden API using `get_pxweb_data()`:
@@ -95,6 +103,19 @@ pxweb_test_data <-
   get_pxweb_data(url = "http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet", 
                  dims = list(ContentsCode = c('PR0101A1'), 
                              Tid = c('*')),
+                 clean = FALSE)
+```
+
+Example of download data from the Statistics Norway API using `get_pxweb_data()`:
+
+```{r directquery-ssb, message=FALSE, eval=FALSE}
+pxweb_test_data_ssb <- 
+  get_pxweb_data(url = "http://data.ssb.no/api/v0/en/table/vf/vf01/aksjer/ASKapital",
+                 dims = list(
+                   NACE2007 = c('A_U'),
+                   ContentsCode = c('ASer'),
+                   Tid = c('*')
+                 ),
                  clean = FALSE)
 ```
 

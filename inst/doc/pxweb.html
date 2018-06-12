@@ -4,15 +4,15 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<meta name="author" content="Mans Magnusson and Leo Lahti" />
+<meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2016-12-05" />
+<meta name="date" content="2018-06-11" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -69,8 +69,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
-<h4 class="author"><em>Mans Magnusson and Leo Lahti</em></h4>
-<h4 class="date"><em>2016-12-05</em></h4>
+<h4 class="author"><em>Mans Magnusson, Leo Lahti et al.</em></h4>
+<h4 class="date"><em>2018-06-11</em></h4>
 
 
 
@@ -96,7 +96,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</code></pre></div>
 <p>Install the latest version from github:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;devtools&quot;</span>)
-devtools::<span class="kw">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</code></pre></div>
+devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(pxweb)</code></pre></div>
 <p>A tutorial is included with the package with:</p>
@@ -123,12 +123,24 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
 d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;api.scb.se&quot;</span>, <span class="dt">version =</span> <span class="st">&quot;v1&quot;</span>, <span class="dt">lang =</span> <span class="st">&quot;sv&quot;</span>)
 
 <span class="co"># Fetching data from statfi (Statistics Finland)</span>
-d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;pxwebapi2.stat.fi&quot;</span>)</code></pre></div>
+d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;pxnet2.stat.fi&quot;</span>)
+
+<span class="co"># Fetching data from StatBank (Statistics Norway)</span>
+d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span class="dt">api =</span> <span class="st">&quot;data.ssb.no&quot;</span>)</code></pre></div>
 <p>Example of download data from the Statistics Sweden API using <code>get_pxweb_data()</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxweb_test_data &lt;-<span class="st"> </span>
 <span class="st">  </span><span class="kw">get_pxweb_data</span>(<span class="dt">url =</span> <span class="st">&quot;http://api.scb.se/OV0104/v1/doris/sv/ssd/PR/PR0101/PR0101E/Basbeloppet&quot;</span>, 
                  <span class="dt">dims =</span> <span class="kw">list</span>(<span class="dt">ContentsCode =</span> <span class="kw">c</span>(<span class="st">'PR0101A1'</span>), 
                              <span class="dt">Tid =</span> <span class="kw">c</span>(<span class="st">'*'</span>)),
+                 <span class="dt">clean =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>Example of download data from the Statistics Norway API using <code>get_pxweb_data()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pxweb_test_data_ssb &lt;-<span class="st"> </span>
+<span class="st">  </span><span class="kw">get_pxweb_data</span>(<span class="dt">url =</span> <span class="st">&quot;http://data.ssb.no/api/v0/en/table/vf/vf01/aksjer/ASKapital&quot;</span>,
+                 <span class="dt">dims =</span> <span class="kw">list</span>(
+                   <span class="dt">NACE2007 =</span> <span class="kw">c</span>(<span class="st">'A_U'</span>),
+                   <span class="dt">ContentsCode =</span> <span class="kw">c</span>(<span class="st">'ASer'</span>),
+                   <span class="dt">Tid =</span> <span class="kw">c</span>(<span class="st">'*'</span>)
+                 ),
                  <span class="dt">clean =</span> <span class="ot">FALSE</span>)</code></pre></div>
 </div>
 </div>
@@ -140,8 +152,8 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
 ## 
-##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov 2014).
-##   pxweb: R tools for PX-WEB API.  URL:
+##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov
+##   2014-2016).  pxweb: R tools for PX-WEB API.  URL:
 ##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -149,7 +161,7 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
 ##     author = {Mans Magnusson and Leo Lahti and Love Hansson},
-##     year = {2014},
+##     year = {2014-2016},
 ##   }</code></pre>
 </div>
 <div id="about-the-api" class="section level2">
@@ -160,32 +172,31 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
 <h2>Session info</h2>
 <p>This vignette was created with</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sessionInfo</span>()</code></pre></div>
-<pre><code>## R Under development (unstable) (2016-12-05 r71733)
-## Platform: x86_64-pc-linux-gnu (64-bit)
-## Running under: Debian GNU/Linux stretch/sid
+<pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS High Sierra 10.13.4
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
 ## 
 ## locale:
-##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
-##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=C              
-##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
-##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
-##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
-## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## [1] C/sv_SE.UTF-8/sv_SE.UTF-8/C/sv_SE.UTF-8/sv_SE.UTF-8
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.6.3
+## [1] pxweb_0.6.37
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.8       digest_0.6.10     rprojroot_1.1    
-##  [4] plyr_1.8.4        R6_2.2.0          jsonlite_1.1     
-##  [7] backports_1.0.4   magrittr_1.5      evaluate_0.10    
-## [10] httr_1.2.1        stringi_1.1.2     curl_2.3         
-## [13] data.table_1.10.0 rmarkdown_1.2     RJSONIO_1.3-0    
-## [16] tools_3.4.0       stringr_1.1.0     yaml_2.1.14      
-## [19] compiler_3.4.0    htmltools_0.3.5   knitr_1.15.1</code></pre>
+##  [1] Rcpp_0.12.16      digest_0.6.12     rprojroot_1.2    
+##  [4] plyr_1.8.4        R6_2.2.2          backports_1.1.1  
+##  [7] magrittr_1.5      evaluate_0.10.1   httr_1.3.1       
+## [10] stringi_1.1.6     data.table_1.10.4 rmarkdown_1.6    
+## [13] RJSONIO_1.3-0     tools_3.4.3       stringr_1.3.0    
+## [16] yaml_2.1.14       compiler_3.4.3    htmltools_0.3.6  
+## [19] knitr_1.17</code></pre>
 </div>
 
 
@@ -195,7 +206,7 @@ d &lt;-<span class="st"> </span><span class="kw">interactive_pxweb</span>(<span 
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
