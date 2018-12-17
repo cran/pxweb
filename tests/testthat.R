@@ -1,3 +1,2 @@
-library(testthat)
-library(pxweb)
-test_check("pxweb")
+print(Sys.getenv("NOT_CRAN"))
+testthat::test_check("pxweb")
