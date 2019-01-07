@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2018-12-17" />
+<meta name="date" content="2019-01-07" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -70,9 +70,33 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author"><em>Mans Magnusson, Leo Lahti et al.</em></h4>
-<h4 class="date"><em>2018-12-17</em></h4>
+<h4 class="date"><em>2019-01-07</em></h4>
 
 
+<div id="TOC">
+<ul>
+<li><a href="#table-of-contents">Table of contents</a></li>
+<li><a href="#introduction"><a name="introduction"></a>Introduction</a><ul>
+<li><a href="#available-data-sources-and-tools">Available data sources and tools</a></li>
+<li><a href="#about-pxweb-apis">About PXWEB APIs</a></li>
+</ul></li>
+<li><a href="#installation"><a name="installation"></a>Installation</a><ul>
+<li><a href="#installation-issues">Installation issues</a></li>
+</ul></li>
+<li><a href="#accessing-pxweb-from-r"><a name="usage"></a>Accessing PXWEB from R</a></li>
+<li><a href="#interactive-use"><a name="interactive"></a>Interactive use</a></li>
+<li><a href="#direct-use"><a name="direct"></a>Direct use</a><ul>
+<li><a href="#creating-data-queries">Creating data queries</a></li>
+<li><a href="#downloading-data">Downloading data</a></li>
+<li><a href="#access-data-footnotescomments">Access data footnotes/comments</a></li>
+</ul></li>
+<li><a href="#citation">Citation</a><ul>
+<li><a href="#known-issues">Known issues</a></li>
+</ul></li>
+<li><a href="#licensing">Licensing</a></li>
+<li><a href="#session-info">Session info</a></li>
+</ul>
+</div>
 
 <p>This R package provides tools to access <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">PX-WEB API</a>. Your <a href="http://ropengov.github.io/contribute/">contributions</a> and <a href="https://github.com/ropengov/pxweb">bug reports and other feedback</a> are welcome!</p>
 <p>More information on the PX-Web/PC-Axis API can be found <a href="http://www.scb.se/Grupp/OmSCB/API/API-description.pdf">here</a>.</p>
@@ -397,7 +421,7 @@ pxjstat</code></pre></div>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2018-12-17T10:06:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2019-01-07T18:09:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -473,9 +497,9 @@ pxdc</code></pre></div>
 <p>Finally, if we use the data, we can easily create a citation for a <code>pxweb_data</code> object using the <code>pxweb_cite()</code> function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pxweb_cite</span>(pxd)</code></pre></div>
 <pre><code>## 
-## Statistics Sweden (2018). &quot;Population by region, marital status,
-## age, sex, observations and year.&quot; [Data accessed 2018-12-17
-## 12:06:36 using pxweb R package 0.8.3], &lt;URL:
+## Statistics Sweden (2019). &quot;Population by region, marital status,
+## age, sex, observations and year.&quot; [Data accessed 2019-01-07
+## 20:11:30 using pxweb R package 0.9.1], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -485,22 +509,22 @@ pxdc</code></pre></div>
 ##     author = {{Statistics Sweden}},
 ##     organization = {Statistics Sweden},
 ##     address = {Stockholm, Sweden},
-##     year = {2018},
+##     year = {2019},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2018-12-17 12:06:36 using pxweb R package 0.8.3]},
+##     note = {[Data accessed 2019-01-07 20:11:30 using pxweb R package 0.9.1]},
 ##   }</code></pre>
 <pre><code>## 
 ## Kindly cite the pxweb R package as follows:
 ## 
-##   (C) Mans Magnusson, Leo Lahti and Love Hansson (rOpenGov
-##   2014-2016).  pxweb: R tools for PXWEB API.  URL:
+##   (C) Mans Magnusson, Markus Kainu, Janne Huovari, and Leo Lahti
+##   (rOpenGov 2014-2016).  pxweb: R tools for PXWEB API.  URL:
 ##   http://github.com/ropengov/pxweb
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
 ##   @Misc{,
 ##     title = {pxweb: R tools for PX-WEB API},
-##     author = {Mans Magnusson and Leo Lahti and Love Hansson},
+##     author = {Mans Magnusson and Markus Kainu and Janne Huovari and Leo Lahti},
 ##     year = {2014-2018},
 ##   }</code></pre>
 <div id="known-issues" class="section level3">
@@ -531,12 +555,12 @@ pxdc</code></pre></div>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.8.3
+## [1] pxweb_0.9.1
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2 R6_2.2.2       
-##  [5] jsonlite_1.5    backports_1.1.2 magrittr_1.5    evaluate_0.11  
-##  [9] httr_1.3.1      stringi_1.2.4   curl_3.2        checkmate_1.8.5
+##  [1] Rcpp_0.12.18    digest_0.6.16   rprojroot_1.3-2 R6_2.3.0       
+##  [5] jsonlite_1.6    backports_1.1.2 magrittr_1.5    evaluate_0.11  
+##  [9] httr_1.4.0      stringi_1.2.4   curl_3.2        checkmate_1.8.5
 ## [13] rmarkdown_1.10  tools_3.5.1     stringr_1.3.1   yaml_2.2.0     
 ## [17] compiler_3.5.1  htmltools_0.3.6 knitr_1.20</code></pre>
 </div>
