@@ -23,12 +23,14 @@ pxweb_split_query <- function(pxq, px, pxmd){
   pxqd <- pxweb_query_dim(pxq)
   # Get variables that can be split
   pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
-  mxv <- px$config$max_values_to_download
   
+  mxv <- px$config$max_values_to_download
+
   # If able to download in one batch
   if(prod(pxqd) <= mxv) return(list(pxq))
   
   # Search through optimal combination
+  assert_query_can_be_split_to_batches(pxq, pxmd, mxv)
   comb <- generate_permutations(which(pxqds))
   no_comb <- matrix(which(!pxqds), nrow = nrow(comb), ncol = sum(!pxqds), byrow = TRUE)
   comb <- cbind(comb, no_comb)
@@ -75,11 +77,16 @@ pxweb_split_query <- function(pxq, px, pxmd){
 }
 
 
+
+
 #' Get vector indicating splittable variables
 #' 
 #' @details 
 #' Splitable variables are variables that can be split. Content variables cannot be split,
-#' not variables with filter == "top"
+#' nor variables with filter == "top".
+#' 
+#' Currently, we can only be sure that time variables and eliminated variables can be split.
+#' Hopefully the next API makes this more clear.
 #' 
 #' @param pxq a \code{pxweb_query} object.
 #' 
@@ -91,6 +98,9 @@ pxweb_query_dim_splittable <- function(pxq, pxmd){
   checkmate::assert_class(pxq, "pxweb_query")
   
   can_be_eliminated <- pxweb_metadata_elimination(pxmd)
+  is_time_variable <- pxweb_metadata_time(pxmd)
+  can_be_eliminated[is_time_variable] <- TRUE
+  
   filter <- pxweb_query_filter(pxq)
   # can_be_eliminated <- can_be_eliminated[sample(1:length(can_be_eliminated))]
   spltable <- can_be_eliminated[names(filter)]
@@ -120,10 +130,11 @@ split_dimensions_left_right <- function(x, bool, max_size){
   
   call_dims <- c(prod(x[!bool]), x[bool])
   for(i in seq_along(call_dims)){
-    prod_value <- prod(call_dims[1:i])/max_size
+    batch_size <- prod(call_dims[1:i])
+    prod_value <- batch_size/max_size
     if(prod_value > 1){
       if(i == 1) {
-        stop("Too large query in variables: ", paste(names(x[!bool]), collapse = ", "), call. = FALSE)
+        stop("\nToo large query. \nVariable(s) '", paste(names(x[!bool]), collapse = "', '"), "' cannot be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", batch_size," and the maximum number of values that can be downloaded through the API is ", max_size, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
       }
       for(j in 1:call_dims[i]){
         if(prod(call_dims[1:(i-1)]) * j > max_size) break
@@ -226,4 +237,17 @@ permutations <- function (n, r, v = 1:n, set = TRUE, repeats.allowed = FALSE)
     }
   }
   sub(n, r, v[1:n])
+}
+
+
+#' Assert that a given pxweb query can be split
+#' 
+#' @param pxq a [pxweb_query] object
+#' @param pxmd a [pxweb_metadata] object
+#' @param mxv maximum batch size
+assert_query_can_be_split_to_batches <- function(pxq, pxmd, mxv){
+  pxqd <- pxweb_query_dim(pxq)
+  pxqds <- pxweb_query_dim_splittable(pxq, pxmd)
+  if(all(!pxqds)) stop("\nToo large query. \nNo Variable(s) can be split into batches (eliminate is set to FALSE by the API). \nThe smallest batch size is ", prod(pxqd)," and the maximum number of values that can be downloaded through the API is ", mxv, ". \nFor details and workarounds, see:\nhttps://github.com/rOpenGov/pxweb/blob/master/TROUBLESHOOTING.md", call. = FALSE)
+  
 }

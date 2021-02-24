@@ -1,4 +1,5 @@
 {
+
   "apis": {
     "api.scb.se": { 
         "alias" : ["scb"],
@@ -20,12 +21,12 @@
         "citation" : {
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "http://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://pxnet2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 30,
+        "calls_per_period": 20,
         "period_in_seconds": 10,
-        "max_values_to_download" : 110000
+        "max_values_to_download" : 100000
               },
   
     "pxwebapi2.stat.fi": {
@@ -33,14 +34,14 @@
         "citation" : {
           "organization" : "Statistics Finland",
           "address" : "Helsinki, Finland"},
-        "url" : "http://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
+        "url" : "https://pxwebapi2.stat.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["fi"],
-        "calls_per_period": 100,
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
-        "max_values_to_download" : 1000
+        "max_values_to_download" : 110000
               },
-  
+      
     "statistik.sjv.se": {
         "alias" : ["jordbruksverket"],
         "description" : "The Swedish Agricultural Agency",
@@ -50,7 +51,7 @@
         "url" : "http://statistik.sjv.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
-        "calls_per_period": 10,
+        "calls_per_period": 1000,
         "period_in_seconds": 10,
         "max_values_to_download" : 1000
               },
@@ -106,8 +107,8 @@
         "url" : "http://statdb.luke.fi/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fi","sv"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
+        "calls_per_period": 10,
+        "period_in_seconds": 10,
         "max_values_to_download" : 10000
               },
               
@@ -122,7 +123,7 @@
         "lang": ["en","fi","sv"],
         "calls_per_period":     100,
         "period_in_seconds":     10,
-        "max_values_to_download":  1000 
+        "max_values_to_download":  150000 
               },
               
     "px.hagstofa.is": {
@@ -136,7 +137,7 @@
         "lang": ["en","is"],
         "calls_per_period": 30,
         "period_in_seconds": 1,
-        "max_values_to_download" : 1000
+        "max_values_to_download" : 10000
               },
               
     "statistik.linkoping.se": {
@@ -148,9 +149,9 @@
         "url" : "http://statistik.linkoping.se/PXWeb/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["sv"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 1000,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000
               },
               
     "pxwebb2017.vgregion.se": {
@@ -173,12 +174,12 @@
         "citation" : {
           "organization" : "Statistics Greenland",
           "address" : "Nuuk, Denmark"},
-        "url" : "http://bank.stat.gl/api/[version]/[lang]",
+        "url" : "https://bank.stat.gl/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","kl","da"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 10000,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000000
               },
 
     "px.rsv.is": {
@@ -201,12 +202,12 @@
         "citation" : {
           "organization" : "Statistics Faroe Islands",
           "address" : "Argir, Faroe Islands"},
-        "url" : "http://statbank.hagstova.fo/api/[version]/[lang]",
+        "url" : "https://statbank.hagstova.fo:443/api/[version]/[lang]",
         "version": ["v1"], 
         "lang": ["en","fo"],
-        "calls_per_period": 30,
-        "period_in_seconds": 1,
-        "max_values_to_download" : 10000
+        "calls_per_period": 9999999,
+        "period_in_seconds": 99999,
+        "max_values_to_download" : 100000
     },
     
     "data.ssb.no": { 
@@ -219,8 +220,8 @@
       "version": ["v0"], 
       "lang": ["en","no"],
       "calls_per_period": 30,
-      "period_in_seconds": 10,
-      "max_values_to_download" : 25000
+      "period_in_seconds": 60,
+      "max_values_to_download" : 30000
     },
 
     "pxweb.asub.ax": {
@@ -251,18 +252,32 @@
       "max_values_to_download" : 10000
     },
     
+      "data.stat.gov.lv": {
+      "alias" : ["csb_lv"],
+      "description" : "Latvia - official statistics",
+      "citation" : {
+          "organization" : "Statistics Latvia",
+          "address" : "Riga, Latvia"},
+      "url" : "http://data.stat.gov.lv/api/[version]/[lang]/",
+      "version": ["v1"], 
+      "lang": ["en", "lv"],
+      "calls_per_period": 100,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
+    },
+    
     "data.csb.gov.lv": {
       "alias" : ["csb_lv"],
-      "description" : "Statistics Latvia",
+      "description" : "Latvia - official statistics (old version)",
       "citation" : {
           "organization" : "Statistics Latvia",
           "address" : "Riga, Latvia"},
       "url" : "http://data.csb.gov.lv/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "lv"],
-      "calls_per_period": 2000,
-      "period_in_seconds": 60,
-      "max_values_to_download" : 23000
+      "calls_per_period": 4000,
+      "period_in_seconds": 300,
+      "max_values_to_download" : 30000
     },
 
     "statbank.statistica.md": {
@@ -271,12 +286,12 @@
       "citation" : {
           "organization" : "Statistics Moldova",
           "address" : "Chisinau, Republic of Moldova"},
-      "url" : "http://statbank.statistica.md/pxweb/api/[version]/[lang]/",
+      "url" : "https://statbank.statistica.md/pxweb/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "ro"],
-      "calls_per_period": 30,
-      "period_in_seconds": 1,
-      "max_values_to_download" : 10000
+      "calls_per_period": 10,
+      "period_in_seconds": 10,
+      "max_values_to_download" : 1000
     },
     
     "www.pxweb.bfs.admin.ch": {
@@ -299,7 +314,7 @@
       "citation" : {
           "organization" : "Kosovo Agency of Statistics",
           "address" : "Pristina, Kosovo"},
-      "url" : "http://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/",
+      "url" : "https://askdata.rks-gov.net/PXWeb/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en"],
       "calls_per_period": 10,
@@ -313,7 +328,7 @@
       "citation" : {
           "organization" : "Finnish Transport Safety Agency",
           "address" : "Helsinki, Finland"},
-      "url" : "http://trafi2.stat.fi/PXWeb/api/[version]/[lang]/",
+      "url" : "https://trafi2.stat.fi/PXWeb/api/[version]/[lang]/",
       "version": ["v1"], 
       "lang": ["en", "sv", "fi"],
       "calls_per_period": 100,
@@ -341,14 +356,55 @@
       "citation" : {
           "organization" : "Portail statistique de la Grande Région",
           "address" : "Esch-sur-Alzette, Luxembourg"},
-      "url" : "http://www.grande-region.lu/pxweb/api/[version]/[lang]",
+      "url" : "https://www.grande-region.lu/pxweb/api/[version]/[lang]",
       "version": ["v1"], 
       "lang": ["fr", "de"],
       "calls_per_period": 10,
       "period_in_seconds": 10,
       "max_values_to_download" : 1000
-    }   
-  },
+    },
 
+    "visitfinland.stat.fi": {
+        "description" : "Visit Finland (Rudolf service)",
+        "citation" : {
+          "organization" : "Business Finland / Statistics Finland",
+          "address" : "Helsinki, Finland"},
+        "url" : "http://visitfinland.stat.fi/PXWeb/api/[version]/[lang]/VisitFinland",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 20,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 110000
+    },
+    
+    "api.aluesarjat.fi": {
+        "description" : "Helsingin seudun aluesarjat -tilastotietokanta",
+        "citation" : {
+          "organization" : "City of Helsinki",
+          "address" : "Helsinki, Finland"},
+        "url" : "https://api.aluesarjat.fi/api/[version]/[lang]",
+        "version": ["v1"], 
+        "lang": ["fi"],
+        "calls_per_period": 1000,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 5000000
+    },
+    
+    "andmed.stat.ee": {
+        "alias" : ["stat_ee"],
+        "description" : "Estonia - official statistics",
+        "citation" : {
+          "organization" : "Statistics Estonia",
+          "address" : "Tallinn, Estonia"},
+        "url" : "https://andmed.stat.ee/api/[version]/[lang]/stat",
+        "version": ["v1"], 
+        "lang": ["en", "et"],
+        "calls_per_period": 1000,
+        "period_in_seconds": 10,
+        "max_values_to_download" : 1000000
+    }
+  },
+    
   "local_apis": {}
+
 }

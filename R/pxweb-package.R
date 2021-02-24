@@ -6,9 +6,9 @@
 #' 
 #' @references 
 #' The decription of the PXWEB API here:
-#' \url{https://www.scb.se/en/About-us/about-the-website-and-terms-of-use/open-data-api/api-for-the-statistical-database/}
+#' \url{https://www.scb.se/en/About-us/about-the-website-and-terms-of-use/open-data-api/}
 #' The official home page of PXWEB can be found here:
-#' \url{https://www.scb.se/sv_/PC-Axis/Programs/PX-Web/}
+#' \url{https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/}
 #' 
 #' @name pxweb-package
 #' @docType package

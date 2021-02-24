@@ -59,15 +59,13 @@ test_that(desc="Previous bugs",{
   skip_on_cran()
   
   # This is a bug in the previous implementation of pxweb
-  url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+  url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   tryr <- try(httr::GET(url), silent = TRUE)
   if(!inherits(tryr, "try-error")){
     expect_silent(px_meta_data <- pxweb_get(url))
     expect_output(print(px_meta_data), regexp = "PXWEB LEVELS")
   }
-  
-  # Missing title
-  expect_silent(pxmd <- pxweb_get(url = "http://statistik.linkoping.se/PXWeb/api/v1/sv/Omsorg/Behandlingshem/ombeh01.px"))
+
 })  
 
 
@@ -133,7 +131,7 @@ test_that(desc="No value bug",{
   pxweb_query_list <- 
     list("HS-Number" = c("06012031"),
          "Country"=c("AF"),
-         "Month"=c("2016M01"),
+         "Month"=c("2020M01"),
          "Unit"=c("kg"))
   
   expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
@@ -144,38 +142,22 @@ test_that(desc="No value bug",{
     list("Country"=c("AF"),
          "Month"=c("2016M01"),
          "Unit"=c("kg"))
-  
+  #  Error: Not all mandatory variables are included in the query. 
   expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
   
   pxweb_query_list <- 
     list("HS-Number" = "*",
          "Country"=c("AF"),
-         "Month"=c("2016M01"),
+         "Month"=c("2020M01"),
          "Unit"=c("kg"))
   
-  expect_error(px_data <- pxweb_get(url, query = pxweb_query_list))
-})  
-
-
-
-test_that(desc="h level",{
-  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
-  skip_on_cran()
-  
-  url <- "http://data.ssb.no/api/v0/en/table/pp/pp04/kpi"
-  expect_silent(px <- pxweb_get(url))
-  
-  expect_silent(px2 <- pxweb_levels_remove_headers(px))
-
-  expect_gt(length(px), length(px2))
+  expect_silent(px_data <- pxweb_get(url, query = pxweb_query_list))
 })  
 
 
 test_that(desc="large variable call",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
-  
-  skip("Get 403, bug reported to SCB in december 2018")
   url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0001/BE0001G/BE0001ENamn10"  
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_last_names.json")
   expect_silent(px <- pxweb_get(url, query = pxweb_query(json_query)))
@@ -192,4 +174,85 @@ test_that(desc="Cite data",{
   expect_output(pxweb_cite(px_data), regexp = "Population by region")
   expect_output(pxweb_cite(px_data), regexp = "Stockholm, Sweden")
 })  
+
+
+test_that(desc="Filter query error bug",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  url <- "http://data.ssb.no/api/v0/en/table/04861"
+  json_query <- readLines(test_path("test_data/filter_query.json"))
+  expect_silent(px_data1 <- suppressWarnings(pxweb_get(url = url, query = json_query)))
+  df1 <- jsonlite::fromJSON(px_data1)
+  
+  expect_silent(x_httr <- httr::content(httr::POST(url, body = json_query, encode = "json"), "text"))
+  df2 <- jsonlite::fromJSON(x_httr)
+
+  expect_identical(df1$dataset$dimension$Region$category$index,
+                   df2$dataset$dimension$Region$category$index)
+  expect_identical(df1$dataset$dimension$Tid$category$index,
+                   df2$dataset$dimension$Tid$category$index)
+
+})  
+
+
+test_that(desc="a small big query",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  px <- pxweb("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+  px$config$max_values_to_download <- 2
+  
+  expect_output(px_data1 <- pxweb_get(url = px, query = pxweb_query_list), regexp = "2 batches")
+  
+  px$config$max_values_to_download <- 4
+  expect_silent(px_data2 <- pxweb_get(url = px, query = pxweb_query_list))
+  
+  expect_identical(px_data1$data, px_data2$data)
+})  
+
+
+
+
+test_that(desc="manually supplying a pxmdo",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+  
+  pxweb_query_list <- 
+    list("Region"=c("00"),
+         "Alder"=c("tot"),
+         "ContentsCode"=c("BE0101N1"),
+         "Tid"=c("2016","2017","2018","2019"))
+  
+  # Download data 
+  url_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+  expect_silent(pxmo1 <- pxweb_get(url = url_md))
+  url_not_md <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A"
+  expect_silent(pxmo2 <- pxweb_get(url = url_not_md))  
+
+  expect_silent(px_data1 <- pxweb_get(url = url_md, query = pxweb_query_list))
+  expect_silent(px_data2 <- pxweb_advanced_get(url = url_md, query = pxweb_query_list, pxmdo = pxmo1))
+  expect_identical(px_data1$data, px_data2$data)
+  
+})  
+
+
+test_that(desc="return clear error message when missing values",{
+  # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
+  skip_on_cran()
+
+  pql <- list("Tilltalsnamn"=c("20Agnes"),
+              "Tid"=c("2019"))
+  url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/START/BE/BE0001/BE0001D/BE0001T05AR"
+  expect_error(pd <- pxweb_get(url, query = pql), regexp = "ContentsCode")
+  
+})  
+
 

@@ -1,21 +1,27 @@
 #' @title Find and download data interactively from a PXWEB API
 #'
-#' @description Wrapper function (for \link{get_pxweb_data} and \link{get_pxweb_metadata}) to simply find and download data to the current R session. 
+#' @description Wrapper function (for \link{pxweb_get}) to simply find and download data to the current R session. 
 #' 
-#' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url. Use \link{api_catalogue} to get a list of apis.
+#' @param x The name or alias of the pxweb api to connect to, a \code{pxweb} object or an url.
 #' 
+#' @return 
+#' The function returns a list with three slots:
+#' \code{url}: The URL to the data
+#' \code{query}: The query to access the data
+#' \code{data}: The downloaded data (if chosen to download data)
 #' 
 #' @seealso
-#' \code{\link{get_pxweb_metadata}}, \code{\link{get_pxweb_data}}
+#' \code{\link{pxweb_get}}
 #' @export
 #' @examples
 #' pxweb_api_catalogue() # List apis
-#' \dontrun{
-#'  x <- pxweb_interactive()
-#'  x <- pxweb_interactive(x = "api.scb.se")
-#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
-#'  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#' }
+#' 
+#' ## The examples below can only be run in interactive mode
+#' ##  x <- pxweb_interactive()
+#' ##  x <- pxweb_interactive(x = "api.scb.se")
+#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/")
+#' ##  x <- pxweb_interactive(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+#' 
 pxweb_interactive <- function(x = NULL){
   # Setup structure
   pxe <- pxweb_explorer(x)
@@ -47,6 +53,12 @@ pxweb_interactive <- function(x = NULL){
   return(invisible(results))
 }
 
+#' @rdname pxweb_interactive
+#' @export
+interactive_pxweb <-function(x = NULL){
+  pxweb_interactive(x)
+}
+
 #' Create a \code{pxweb_explorer} object.
 #' @param x a \code{pxweb} object, a PXWEB url, \code{NULL} or an api in the api catalogue.
 #' 
@@ -60,12 +72,15 @@ pxweb_interactive <- function(x = NULL){
 #' in case of url.
 #' 
 #' @examples 
-#' \dontrun{
-#'  x <- pxweb_explorer()
-#'  x <- pxweb_explorer(x = "api.scb.se")
-#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
-#'  x <- pxweb_explorer(x = "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
-#' }
+#' ## The functions below are internal generic functions
+#' ## x <- pxweb_explorer()
+#' ## url <- "api.scb.se"
+#' ## x <- pxweb_explorer(x = url)
+#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/"
+#' ## x <- pxweb_explorer(x = url)
+#' ## url <- "http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy"
+#' ## x <- pxweb_explorer(x = url)
+#' 
 #' @keywords internal
 pxweb_explorer <- function(x = NULL){
   UseMethod("pxweb_explorer")
@@ -748,7 +763,7 @@ print.pxweb_input_allowed <- function(x, ...){
 #' @keywords internal
 pxe_pxobj_at_position <- function(x){
   checkmate::assert_class(x, "pxweb_explorer")
-  pxweb_levels_remove_headers(x$pxobjs[[pxe_position_path(x)]]$pxobj)
+  x$pxobjs[[pxe_position_path(x)]]$pxobj
 }
 
 #' @rdname pxe_pxobj_at_position
@@ -953,7 +968,7 @@ pxe_print_download_code <- function(pxe, as){
       "  pxweb_get(url = \"", pxe_data_url(pxe), "\",\n",
       "            query = ",q_path,")\n\n", sep ="")
   cat("# Convert to data.frame \n",
-      "px_data <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n\n", sep ="")
+      "px_data_frame <- as.data.frame(px_data, column.name.type = \"text\", variable.value.type = \"text\")\n\n", sep ="")
   
   cat("# Get pxweb data comments \n",
       "px_data_comments <- pxweb_data_comments(px_data)\n",

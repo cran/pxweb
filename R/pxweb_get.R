@@ -5,6 +5,7 @@
 #' @param verbose should large queries print out progress.
 #' 
 #' @examples 
+#' \dontrun{
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' px_meta_data <- pxweb_get(url)
 #' 
@@ -33,8 +34,6 @@
 #'                             "extdata", "examples", "json-stat_query_example.json")
 #' jstat_data <- pxweb_get(url = url, query = query)
 #' 
-#' 
-#' \dontrun{
 #' # Get very large datasets (multiple downloads needed)
 #' big_query <- file.path(system.file(package = "pxweb"), 
 #'                        "extdata", "examples", "json_big_query_example.json")
@@ -58,10 +57,12 @@ pxweb_get <- function(url, query = NULL, verbose = TRUE){
 #' @inheritParams pxweb_as_data_frame
 #' 
 #' @examples 
+#' \dontrun{
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' query <- file.path(system.file(package = "pxweb"), 
 #'                    "extdata", "examples", "json_query_example.json")
 #' df <- pxweb_get_data(url = url, query = query)
+#' }
 #' 
 #' @export
 pxweb_get_data <- function(url, query, verbose = TRUE, column.name.type = "text", variable.value.type = "text"){
@@ -100,9 +101,6 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
     } else {
       pxmd <- pxmdo
     }
-    if(!inherits(pxmd, "pxweb_metadata")) {
-      stop("The path is not a PXWEB API table endpoint with data:\n", build_pxweb_url(px), call. = FALSE)
-    }
     pxq <- pxweb_add_metadata_to_query(pxq, pxmd)
     pxweb_validate_query_with_metadata(pxq, pxmd)
     pxqs <- pxweb_split_query(pxq, px, pxmd)
@@ -112,7 +110,9 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
   
   if(is.null(pxq)){
     px <- pxweb_add_call(px)  
-    r <- httr::GET(build_pxweb_url(px), ...)
+    r <- httr::GET(build_pxweb_url(px), 
+                   pxweb_user_agent(), 
+                   ...)
     pxweb_http_log_response(r)
     httr::stop_for_status(r)
     pxr <- pxweb_parse_response(x = r)
@@ -127,7 +127,7 @@ pxweb_advanced_get <- function(url, query = NULL, verbose = TRUE, log_http_calls
       px <- pxweb_add_call(px)  
       pxurl <- build_pxweb_url(px)
       pxqs[[i]] <- pxweb_remove_metadata_from_query(pxqs[[i]], pxmd)
-      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), ...)
+      r <- httr::POST(pxurl, body = pxweb_as_json(x = pxqs[[i]]), pxweb_user_agent(), ...)
       pxweb_http_log_response(r)
       httr::stop_for_status(r)
       pxr[[i]] <- pxweb_parse_response(x = r)
@@ -204,3 +204,9 @@ pxweb_metadata_add_null_values <- function(x, px){
   assert_pxweb_metadata(x)
   x
 }
+
+
+pxweb_user_agent <- function(){
+  httr::user_agent("https://github.com/rOpenGov/pxweb")
+}
+

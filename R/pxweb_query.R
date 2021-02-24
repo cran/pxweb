@@ -164,11 +164,13 @@ print.pxweb_query <- function(x, ...){
 #' @param pxmd a \code{pxweb_metadata} object.
 #' 
 #' @examples 
+#' \dontrun{
 #' url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 #' json_query <- file.path(system.file(package = "pxweb"), 
 #'                         "extdata", "examples", "json_query_example.json")
 #' pxq <- pxweb_query(json_query)
 #' pxweb_validate_query_with_metadata(pxq, pxweb_get(url))
+#' }
 #' 
 #' @export
 pxweb_validate_query_with_metadata <- function(pxq, pxmd){
@@ -186,7 +188,7 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
       meta_idx <- which(pxweb_metadata_variables %in% pxweb_query_variable_code)
       pxweb_metadata_variable_values <- pxmd$variables[[meta_idx]]$values
       if(!is.null(pxweb_metadata_variable_values)){
-        checkmate::assert_subset(pxweb_query_variable_values, choices = pxweb_metadata_variable_values)
+        checkmate::assert_subset(pxweb_query_variable_values, choices = pxweb_metadata_variable_values, .var.name = pxq$query[[i]]$code)
       }
     }
   }
@@ -197,7 +199,8 @@ pxweb_validate_query_with_metadata <- function(pxq, pxmd){
     }
   }
   if(!all(mandatory_variables %in% query_variables)){
-    stop("Not all mandatory variables are included in the query.", call. = FALSE)
+    mandatory_variables_missing <- mandatory_variables[!mandatory_variables %in% query_variables]
+    stop("Mandatory variable(s) '", paste0(mandatory_variables_missing, collapse = "', '"), "' is missing in the query.", call. = FALSE)
   }
 }
 
@@ -222,10 +225,10 @@ pxweb_add_metadata_to_query <- function(pxq, pxmd){
     checkmate::assert_choice(pxweb_query_variable_code, choices = pxweb_metadata_variables)
     if(tolower(pxq$query[[i]]$selection$filter) == "all"){
       px_pattern <- pxq$query[[i]]$selection$values
-      px_pattern <- gsub(pattern = "\\*", replacement = "\\.\\+", px_pattern)
+      px_pattern <- paste0("^", gsub(pattern = "\\*", replacement = "\\.\\+", px_pattern))
       meta_data_values <- pxmd$variables[[which(pxweb_metadata_variables %in% pxweb_query_variable_code)]]$values
       if(!is.null(meta_data_values)){
-        meta_data_values[grepl(x = meta_data_values, pattern = px_pattern)]
+        meta_data_values <- meta_data_values[grepl(x = meta_data_values, pattern = px_pattern)]
         pxq$query[[i]]$selection$values <- meta_data_values
         pxq$query[[i]]$selection$filter <- "item"
       }

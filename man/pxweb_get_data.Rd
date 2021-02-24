@@ -4,8 +4,13 @@
 \alias{pxweb_get_data}
 \title{Do a GET call to PXWEB API and return a data.frame}
 \usage{
-pxweb_get_data(url, query, verbose = TRUE, column.name.type = "text",
-  variable.value.type = "text")
+pxweb_get_data(
+  url,
+  query,
+  verbose = TRUE,
+  column.name.type = "text",
+  variable.value.type = "text"
+)
 }
 \arguments{
 \item{url}{a \code{pxweb} object or url that can be coherced to a \code{pxweb} object.}
@@ -26,10 +31,12 @@ The functions use will do a \code{pxweb_query} to a PXWEB \code{url} and return 
 This is a wrapper for the \code{pxweb_get} function.
 }
 \examples{
+\dontrun{
 url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
 query <- file.path(system.file(package = "pxweb"), 
                    "extdata", "examples", "json_query_example.json")
 df <- pxweb_get_data(url = url, query = query)
+}
 
 }
 \seealso{

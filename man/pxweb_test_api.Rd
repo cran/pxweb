@@ -4,8 +4,13 @@
 \alias{pxweb_test_api}
 \title{Test a full or a part of a PXWEB api.}
 \usage{
-pxweb_test_api(url, test_type = "first", n = 1, verbose = TRUE,
-  time_limit = Inf)
+pxweb_test_api(
+  url,
+  test_type = "first",
+  n = 1,
+  verbose = TRUE,
+  time_limit = Inf
+)
 }
 \arguments{
 \item{url}{The base url to the pxweb api (or a branch of the metadata tree)}
@@ -36,7 +41,7 @@ By using a branch in a tree the api is tested below this branch.
 }
 \examples{
 \dontrun{
-  url <- "http://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
+  url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
   res <- pxweb_test_api(url)
   res <- pxweb_test_api(url, test_type="touch")
 }
