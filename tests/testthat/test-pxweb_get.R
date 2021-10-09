@@ -5,6 +5,8 @@ context("pxweb_get")
 test_that(desc="Constructor works as it should with Statistics Sweden",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_on_os("windows")
+  skip_on_os("mac")
   
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px_meta_data <- pxweb_get(url))
@@ -57,6 +59,8 @@ test_that(desc="Constructor works as it should with Statistics Sweden",{
 test_that(desc="Previous bugs",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_on_os("windows")
+  skip_on_os("mac")
   
   # This is a bug in the previous implementation of pxweb
   url <- "https://bank.stat.gl/api/v1/en/Greenland/BE/BE01"
@@ -73,6 +77,8 @@ test_that(desc="Previous bugs",{
 test_that(desc="Test to download json-stat objects",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_on_os("windows")
+  skip_on_os("mac")
   
   # Test json-stat
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
@@ -95,6 +101,8 @@ test_that(desc="Test to download json-stat objects",{
 test_that(desc="Test pxweb_get_data",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_on_os("windows")
+  skip_on_os("mac")
   
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   json_query <- file.path(system.file(package = "pxweb"), "extdata", "examples", "json_query_example.json")
@@ -107,6 +115,8 @@ test_that(desc="Test pxweb_get_data",{
 test_that(desc="Test http logger",{
   # CRAN seem to run tests in parallel, hence API tests cannot be run on CRAN.
   skip_on_cran()
+  skip_on_os("windows")
+  skip_on_os("mac")
   
   url <- "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy"
   expect_silent(px <- pxweb(url))

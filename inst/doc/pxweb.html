@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2021-07-08" />
+<meta name="date" content="2021-10-09" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -319,7 +319,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
-<h4 class="date">2021-07-08</h4>
+<h4 class="date">2021-10-09</h4>
 
 
 <div id="TOC">
@@ -421,7 +421,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2020
 ##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2020
 ##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2020
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2021M05
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2021M08
 ##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2020</code></pre>
 <p>And if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get PXWEB metadata about a table</span></span>
@@ -669,7 +669,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2021-07-08T09:12:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2021-10-09T17:52:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -753,8 +753,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">pxweb_cite</span>(pxd)</span></code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2021). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2021-07-08 11:12:13 using
-## pxweb R package 0.11.0], &lt;URL:
+## sex, observations and year.&quot; [Data accessed 2021-10-09 19:52:19 using
+## pxweb R package 0.12.0], &lt;URL:
 ## http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -766,7 +766,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ##     address = {Stockholm, Sweden},
 ##     year = {2021},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2021-07-08 11:12:13 using pxweb R package 0.11.0]},
+##     note = {[Data accessed 2021-10-09 19:52:19 using pxweb R package 0.12.0]},
 ##   }
 ## 
 ## 
@@ -798,7 +798,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">sessionInfo</span>()</span></code></pre></div>
 <pre><code>## R version 4.0.2 (2020-06-22)
 ## Platform: x86_64-apple-darwin17.0 (64-bit)
-## Running under: macOS Catalina 10.15.7
+## Running under: macOS  10.16
 ## 
 ## Matrix products: default
 ## BLAS:   /Library/Frameworks/R.framework/Versions/4.0/Resources/lib/libRblas.dylib
@@ -811,11 +811,11 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.11.0
+## [1] pxweb_0.12.0
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] digest_0.6.27   R6_2.5.0        jsonlite_1.7.2  backports_1.2.1
-##  [5] magrittr_2.0.1  evaluate_0.14   httr_1.4.2      rlang_0.4.10   
+##  [1] digest_0.6.27   R6_2.5.1        jsonlite_1.7.2  backports_1.2.1
+##  [5] magrittr_2.0.1  evaluate_0.14   httr_1.4.2      rlang_0.4.11   
 ##  [9] stringi_1.5.3   curl_4.3.2      checkmate_2.0.0 rmarkdown_2.3  
 ## [13] tools_4.0.2     stringr_1.4.0   xfun_0.17       yaml_2.2.1     
 ## [17] compiler_4.0.2  htmltools_0.5.0 knitr_1.29</code></pre>
