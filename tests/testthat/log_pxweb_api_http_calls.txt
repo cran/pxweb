@@ -1,7 +1,7 @@
-PXWEB API HTTP LOG 2020-09-10 11:07:13:
+PXWEB API HTTP LOG 2022-07-01 15:08:36:
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy?config",
   "status_code": 200,
@@ -11,8 +11,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "server": "Microsoft-IIS/10.0",
     "access-control-allow-origin": "*",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "80"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "80",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -24,22 +25,23 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "server": "Microsoft-IIS/10.0",
         "access-control-allow-origin": "*",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "80"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "80",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0, 0.0001, 0.0001, 0.0002, 0.0154, 0.0154],
+  "date": "2022-07-01 13:08:36",
+  "times": [0, 0.0001, 0.0001, 0.0002, 0.0281, 0.0282],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy?config",
     "headers": "application/json, text/xml, application/xml, */*",
     "fields": {},
     "options": {
-      "useragent": "libcurl/7.64.1 r-curl/4.3 httr/1.4.2",
+      "useragent": "libcurl/7.79.1 r-curl/4.3.2 httr/1.4.3",
       "httpget": true
     },
     "auth_token": {},
@@ -48,7 +50,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/?config",
   "status_code": 403,
@@ -56,8 +58,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "content-type": "text/html",
     "server": "Microsoft-IIS/10.0",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "1233"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "1233",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -68,8 +71,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "location": "http://api.scb.se/OV0104/?config",
         "server": "Microsoft-IIS/10.0",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "155"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "155",
+        "vary": "Origin"
       }
     },
     {
@@ -79,22 +83,23 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "content-type": "text/html",
         "server": "Microsoft-IIS/10.0",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "1233"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "1233",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0.0095, 0.0001, 0.0001, 0.0002, 0.0189, 0.0191],
+  "date": "2022-07-01 13:08:36",
+  "times": [0.0229, 0.0001, 0.0001, 0.0005, 0.0426, 0.0467],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104?config",
     "headers": "application/json, text/xml, application/xml, */*",
     "fields": {},
     "options": {
-      "useragent": "libcurl/7.64.1 r-curl/4.3 httr/1.4.2",
+      "useragent": "libcurl/7.79.1 r-curl/4.3.2 httr/1.4.3",
       "httpget": true
     },
     "auth_token": {},
@@ -103,7 +108,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/?config",
   "status_code": 403,
@@ -111,8 +116,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "content-type": "text/html",
     "server": "Microsoft-IIS/10.0",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "1233"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "1233",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -123,8 +129,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "location": "http://api.scb.se/OV0104/v1/?config",
         "server": "Microsoft-IIS/10.0",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "158"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "158",
+        "vary": "Origin"
       }
     },
     {
@@ -134,22 +141,23 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "content-type": "text/html",
         "server": "Microsoft-IIS/10.0",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "1233"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "1233",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0.0083, 0.0001, 0.0001, 0.0002, 0.0281, 0.0293],
+  "date": "2022-07-01 13:08:36",
+  "times": [0.0269, 0.0001, 0.0001, 0.0004, 0.0471, 0.0513],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104/v1?config",
     "headers": "application/json, text/xml, application/xml, */*",
     "fields": {},
     "options": {
-      "useragent": "libcurl/7.64.1 r-curl/4.3 httr/1.4.2",
+      "useragent": "libcurl/7.79.1 r-curl/4.3.2 httr/1.4.3",
       "httpget": true
     },
     "auth_token": {},
@@ -158,7 +166,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/doris?config",
   "status_code": 404,
@@ -166,8 +174,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "content-type": "text/html",
     "server": "Microsoft-IIS/10.0",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "1245"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "1245",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -177,22 +186,23 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "content-type": "text/html",
         "server": "Microsoft-IIS/10.0",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "1245"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "1245",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0, 0, 0, 0.0001, 0.0093, 0.0097],
+  "date": "2022-07-01 13:08:36",
+  "times": [0, 0, 0, 0.0002, 0.0227, 0.0231],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104/v1/doris?config",
     "headers": "application/json, text/xml, application/xml, */*",
     "fields": {},
     "options": {
-      "useragent": "libcurl/7.64.1 r-curl/4.3 httr/1.4.2",
+      "useragent": "libcurl/7.79.1 r-curl/4.3.2 httr/1.4.3",
       "httpget": true
     },
     "auth_token": {},
@@ -201,7 +211,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/doris/sv?config",
   "status_code": 200,
@@ -211,8 +221,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "server": "Microsoft-IIS/10.0",
     "access-control-allow-origin": "*",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "80"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "80",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -224,22 +235,23 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "server": "Microsoft-IIS/10.0",
         "access-control-allow-origin": "*",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "80"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "80",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0, 0, 0, 0.0001, 0.0091, 0.0091],
+  "date": "2022-07-01 13:08:36",
+  "times": [0, 0, 0, 0.0002, 0.0221, 0.0221],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104/v1/doris/sv?config",
     "headers": "application/json, text/xml, application/xml, */*",
     "fields": {},
     "options": {
-      "useragent": "libcurl/7.64.1 r-curl/4.3 httr/1.4.2",
+      "useragent": "libcurl/7.79.1 r-curl/4.3.2 httr/1.4.3",
       "httpget": true
     },
     "auth_token": {},
@@ -248,7 +260,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
   "status_code": 200,
@@ -258,8 +270,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "server": "Microsoft-IIS/10.0",
     "access-control-allow-origin": "*",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "8575"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "8603",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -271,15 +284,16 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "server": "Microsoft-IIS/10.0",
         "access-control-allow-origin": "*",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "8575"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "8603",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0, 0.0001, 0.0001, 0.0001, 0.0102, 0.012],
+  "date": "2022-07-01 13:08:36",
+  "times": [0, 0.0001, 0.0001, 0.0003, 0.0208, 0.0225],
   "request": {
     "method": "GET",
     "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
@@ -295,7 +309,7 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
 }
 
 
-CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13: 
+CALL AND RESPONSE FROM PXWEB API 2022-07-01 15:08:36: 
 {
   "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",
   "status_code": 200,
@@ -305,8 +319,9 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
     "server": "Microsoft-IIS/10.0",
     "access-control-allow-origin": "*",
     "x-powered-by": "ASP.NET",
-    "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-    "content-length": "720"
+    "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+    "content-length": "720",
+    "vary": "Origin"
   },
   "all_headers": [
     {
@@ -318,15 +333,16 @@ CALL AND RESPONSE FROM PXWEB API 2020-09-10 11:07:13:
         "server": "Microsoft-IIS/10.0",
         "access-control-allow-origin": "*",
         "x-powered-by": "ASP.NET",
-        "date": "Thu, 10 Sep 2020 09:07:13 GMT",
-        "content-length": "720"
+        "date": "Fri, 01 Jul 2022 13:08:36 GMT",
+        "content-length": "720",
+        "vary": "Origin"
       }
     }
   ],
   "cookies": [],
   "content": "The content is removed to limit log file size.",
-  "date": "2020-09-10 09:07:13",
-  "times": [0, 0, 0, 0.0001, 0, 0.0093],
+  "date": "2022-07-01 13:08:36",
+  "times": [0, 0, 0, 0.0001, 0.0253, 0.0253],
   "request": {
     "method": "POST",
     "url": "http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101A/BefolkningNy",

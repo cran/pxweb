@@ -85,6 +85,12 @@ pxjstat <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A
 pxjstat
 
 ## ---- message=FALSE, eval=TRUE------------------------------------------------
+pxq$response$format <- "px"
+pxfp <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+                     pxq)
+pxfp
+
+## ---- message=FALSE, eval=TRUE------------------------------------------------
 pxdf <- as.data.frame(pxd, column.name.type = "text", variable.value.type = "text")
 head(pxdf)
 
