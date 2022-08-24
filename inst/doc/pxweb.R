@@ -2,8 +2,8 @@
 #  install.packages("pxweb")
 
 ## ----install2, eval=FALSE-----------------------------------------------------
-#  library("devtools")
-#  devtools::install_github("ropengov/pxweb")
+#  library("remotes")
+#  remotes::install_github("ropengov/pxweb")
 
 ## ----test, message=FALSE, warning=FALSE, eval=TRUE----------------------------
 library(pxweb)

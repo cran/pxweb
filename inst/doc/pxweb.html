@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2022-07-01" />
+<meta name="date" content="2022-08-24" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -334,7 +334,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
-<h4 class="date">2022-07-01</h4>
+<h4 class="date">2022-08-24</h4>
 
 
 <div id="TOC">
@@ -409,8 +409,8 @@ dimensions are available for the data at that leaf node.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;pxweb&quot;</span>)</span></code></pre></div>
 <p>To install the latest stable release version from GitHub, just
 use:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;devtools&quot;</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;remotes&quot;</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;ropengov/pxweb&quot;</span>)</span></code></pre></div>
 <p>Test the installation by loading the library:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pxweb)</span></code></pre></div>
 <p>A tutorial is included with the package with:</p>
@@ -481,7 +481,7 @@ is an example of a PXWEB LEVELS object.</p>
 ##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2021
 ##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021
 ##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2021
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M04
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M06
 ##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2021</code></pre>
 <p>And if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA
 object is returned.</p>
@@ -750,7 +750,7 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2022-07-01T16:09:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2022-08-24T11:21:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -795,7 +795,7 @@ if you need other response formats.</p>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pxfp</span></code></pre></div>
-<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpQK0qkz/cbb8fbafc839058c55f6fa3fbcef6fac65244b32.px&quot;</code></pre>
+<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpKS9cdj/242b4a55469af4ee09dab9a75eb97797bc456b69.px&quot;</code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
 then downloaded sequentially. PXWEB data objects are then combined into
@@ -867,8 +867,8 @@ function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2022). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2022-07-01 18:09:46 using
-## pxweb R package 0.15.1],
+## sex, observations and year.&quot; [Data accessed 2022-08-24 13:21:08 using
+## pxweb R package 0.16.1],
 ## &lt;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
@@ -880,7 +880,7 @@ function. For full reproducibility, please also cite the package.</p>
 ##     address = {Stockholm, Sweden},
 ##     year = {2022},
 ##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2022-07-01 18:09:46 using pxweb R package 0.15.1]},
+##     note = {[Data accessed 2022-08-24 13:21:08 using pxweb R package 0.16.1]},
 ##   }
 ## 
 ## 
@@ -930,7 +930,7 @@ file</a>.</p>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.15.1
+## [1] pxweb_0.16.1
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] digest_0.6.29   R6_2.5.1        backports_1.4.1 jsonlite_1.8.0 
