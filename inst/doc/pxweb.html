@@ -12,7 +12,7 @@
 
 <meta name="author" content="Mans Magnusson, Leo Lahti et al." />
 
-<meta name="date" content="2022-08-24" />
+<meta name="date" content="2022-10-31" />
 
 <title>PX-WEB API Interface for R</title>
 
@@ -334,35 +334,38 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 <h1 class="title toc-ignore">PX-WEB API Interface for R</h1>
 <h4 class="author">Mans Magnusson, Leo Lahti et al.</h4>
-<h4 class="date">2022-08-24</h4>
+<h4 class="date">2022-10-31</h4>
 
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a>
+<li><a href="#introduction" id="toc-introduction">Introduction</a>
 <ul>
-<li><a href="#available-data-sources-and-tools">Available data sources
-and tools</a></li>
-<li><a href="#about-pxweb-apis">About PXWEB APIs</a></li>
+<li><a href="#available-data-sources-and-tools" id="toc-available-data-sources-and-tools">Available data sources and
+tools</a></li>
+<li><a href="#about-pxweb-apis" id="toc-about-pxweb-apis">About PXWEB
+APIs</a></li>
 </ul></li>
-<li><a href="#installation">Installation</a>
+<li><a href="#installation" id="toc-installation">Installation</a>
 <ul>
-<li><a href="#installation-issues">Installation issues</a></li>
+<li><a href="#installation-issues" id="toc-installation-issues">Installation issues</a></li>
 </ul></li>
-<li><a href="#accessing-pxweb-from-r">Accessing PXWEB from R</a></li>
-<li><a href="#interactive-use">Interactive use</a></li>
-<li><a href="#direct-use">Direct use</a>
+<li><a href="#accessing-pxweb-from-r" id="toc-accessing-pxweb-from-r">Accessing PXWEB from R</a></li>
+<li><a href="#interactive-use" id="toc-interactive-use">Interactive
+use</a></li>
+<li><a href="#direct-use" id="toc-direct-use">Direct use</a>
 <ul>
-<li><a href="#creating-data-queries">Creating data queries</a></li>
-<li><a href="#downloading-data">Downloading data</a></li>
-<li><a href="#access-data-footnotescomments">Access data
+<li><a href="#creating-data-queries" id="toc-creating-data-queries">Creating data queries</a></li>
+<li><a href="#downloading-data" id="toc-downloading-data">Downloading
+data</a></li>
+<li><a href="#access-data-footnotescomments" id="toc-access-data-footnotescomments">Access data
 footnotes/comments</a></li>
 </ul></li>
-<li><a href="#citation">Citation</a></li>
-<li><a href="#known-issues-and-troubleshooting">Known issues and
+<li><a href="#citation" id="toc-citation">Citation</a></li>
+<li><a href="#known-issues-and-troubleshooting" id="toc-known-issues-and-troubleshooting">Known issues and
 troubleshooting</a></li>
-<li><a href="#licensing">Licensing</a></li>
-<li><a href="#session-info">Session info</a></li>
+<li><a href="#licensing" id="toc-licensing">Licensing</a></li>
+<li><a href="#session-info" id="toc-session-info">Session info</a></li>
 </ul>
 </div>
 
@@ -451,7 +454,7 @@ the query of interest.</p>
 <p>In the example above, we use the interactive functionality from the
 PXWEB API root, but we could use any path to the API.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Start with a specific path.</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</span></code></pre></div>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A&quot;</span>)</span></code></pre></div>
 <p>This functionality also means that we can navigate any PXWEB API,
 irrespectively of if they are a part of the R package API catalogue or
 not. Just supply an URL to somewhere in the API and then navigate the
@@ -475,18 +478,18 @@ either returns a PXWEB LEVELS object or a PXWEB METADATA object. What is
 returned depends on if the URL points to a table in the API or not. Here
 is an example of a PXWEB LEVELS object.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get PXWEB levels</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>px_levels <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>px_levels <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/&quot;</span>)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>px_levels</span></code></pre></div>
 <pre><code>## PXWEB LEVELS
 ##   BefolkningNy (t): Population by region, marital status, age and sex.  Year 1968 - 2021
 ##   FolkmangdNov (t): Population 1 November by region, age and sex. Year 2002 - 2021
 ##   FolkmangdDistrikt (t): Population by district, Landscape or Part of the country by sex. Year 2015 - 2021
-##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M06
+##   BefolkManad (t): Population per month by region, age and sex. Year 2000M01 - 2022M08
 ##   BefolkningR1860N (t): Population by age and sex. Year 1860 - 2021</code></pre>
 <p>And if we use <code>pxweb_get()</code> for a table, a PXWEB METADATA
 object is returned.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get PXWEB metadata about a table</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>px_meta <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>px_meta <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>px_meta</span></code></pre></div>
 <pre><code>## PXWEB METADATA
 ## Population by region, marital status, age, sex, observations and year 
@@ -505,7 +508,7 @@ an URL that will return a metadata object if not a query is supplied.
 Creating a query can be done in three main ways. The first and most
 straightforward approach is to use <code>pxweb_interactive()</code> to
 explore the table URL and create a query interactively.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">pxweb_interactive</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>)</span></code></pre></div>
 <p>The interactive function will return the query and the URL, even if
 the data is not downloaded.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>d<span class="sc">$</span>url</span></code></pre></div>
@@ -642,7 +645,7 @@ manually.</p>
 <p>When we have the URL to a data table and a query, we can download the
 data with “<code>pxweb_get()</code>”. The function returns a
 <code>pxweb_data</code> object that contains the downloaded data.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pxd <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>pxd <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>                 pxq)</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>pxd</span></code></pre></div>
 <pre><code>## PXWEB DATA
@@ -650,7 +653,7 @@ data with “<code>pxweb_get()</code>”. The function returns a
 <p>If we instead want a JSON-stat object, we change the response format
 to JSON-stat, and we will get a JSON-stat object returned.</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;json-stat&quot;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pxjstat <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>pxjstat <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
 <span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>pxjstat</span></code></pre></div>
 <pre><code>## {
@@ -750,7 +753,7 @@ to JSON-stat, and we will get a JSON-stat object returned.</p>
 ##     },
 ##     &quot;label&quot;: [&quot;Population by marital status, sex, observations and year&quot;],
 ##     &quot;source&quot;: [&quot;Statistics Sweden&quot;],
-##     &quot;updated&quot;: [&quot;2022-08-24T11:21:00Z&quot;],
+##     &quot;updated&quot;: [&quot;2022-10-31T12:02:00Z&quot;],
 ##     &quot;value&quot;: [
 ##       [2762601],
 ##       [2820248],
@@ -792,10 +795,10 @@ the R <code>tempdir()</code> folded, and the file paths are returned by
 <code>sdmx</code> formats can be downloaded as files, but file an issue
 if you need other response formats.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>pxq<span class="sc">$</span>response<span class="sc">$</span>format <span class="ot">&lt;-</span> <span class="st">&quot;px&quot;</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>pxfp <span class="ot">&lt;-</span> <span class="fu">pxweb_get</span>(<span class="st">&quot;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&quot;</span>,</span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                     pxq)</span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>pxfp</span></code></pre></div>
-<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpKS9cdj/242b4a55469af4ee09dab9a75eb97797bc456b69.px&quot;</code></pre>
+<pre><code>## [1] &quot;/var/folders/8x/bgssdq5n6dx1_ydrhq1zgrym0000gn/T//RtmpSQkZa7/eeff7ccdfcf00c6641501173bf5c05a96f09b522.px&quot;</code></pre>
 <p>If the queries are large (contain more values than the PXWEB API
 maximum allowed values), the query is chunked into optimal chunks and is
 then downloaded sequentially. PXWEB data objects are then combined into
@@ -867,9 +870,9 @@ function. For full reproducibility, please also cite the package.</p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pxweb_cite</span>(pxd)</span></code></pre></div>
 <pre><code>## 
 ## Statistics Sweden (2022). &quot;Population by region, marital status, age,
-## sex, observations and year.&quot; [Data accessed 2022-08-24 13:21:08 using
-## pxweb R package 0.16.1],
-## &lt;http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
+## sex, observations and year.&quot; [Data accessed 2022-10-31 13:02:07 using
+## pxweb R package 0.16.2],
+## &lt;https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy&gt;.
 ## 
 ## A BibTeX entry for LaTeX users is
 ## 
@@ -879,8 +882,8 @@ function. For full reproducibility, please also cite the package.</p>
 ##     organization = {Statistics Sweden},
 ##     address = {Stockholm, Sweden},
 ##     year = {2022},
-##     url = {http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
-##     note = {[Data accessed 2022-08-24 13:21:08 using pxweb R package 0.16.1]},
+##     url = {https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy},
+##     note = {[Data accessed 2022-10-31 13:02:07 using pxweb R package 0.16.2]},
 ##   }
 ## 
 ## 
@@ -930,7 +933,7 @@ file</a>.</p>
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] pxweb_0.16.1
+## [1] pxweb_0.16.2
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] digest_0.6.29   R6_2.5.1        backports_1.4.1 jsonlite_1.8.0 

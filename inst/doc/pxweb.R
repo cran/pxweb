@@ -29,23 +29,23 @@ library(pxweb)
 
 ## ----inapi, message=FALSE, eval=FALSE-----------------------------------------
 #  # Start with a specific path.
-#  d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A")
+#  d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A")
 
 ## ---- message=FALSE, eval=FALSE-----------------------------------------------
 #  file.edit(pxweb_api_catalogue_path())
 
 ## ----levels, message=FALSE, eval=TRUE-----------------------------------------
 # Get PXWEB levels
-px_levels <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+px_levels <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
 px_levels
 
 ## ----meta, message=FALSE, eval=TRUE-------------------------------------------
 # Get PXWEB metadata about a table
-px_meta <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 px_meta
 
 ## ---- message=FALSE, eval=FALSE-----------------------------------------------
-#  d <- pxweb_interactive("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+#  d <- pxweb_interactive("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 
 ## ---- message=FALSE, eval=TRUE, echo=FALSE------------------------------------
 # save(d, file = "d_example.rda")
@@ -74,19 +74,19 @@ pxq
 pxweb_validate_query_with_metadata(pxq, px_meta)
 
 ## ---- message=FALSE, eval=TRUE------------------------------------------------
-pxd <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+pxd <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
                  pxq)
 pxd
 
 ## ---- message=FALSE, eval=TRUE------------------------------------------------
 pxq$response$format <- "json-stat"
-pxjstat <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+pxjstat <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
                      pxq)
 pxjstat
 
 ## ---- message=FALSE, eval=TRUE------------------------------------------------
 pxq$response$format <- "px"
-pxfp <- pxweb_get("http://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+pxfp <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
                      pxq)
 pxfp
 
