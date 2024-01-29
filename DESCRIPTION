@@ -1,8 +1,8 @@
 Type: Package
 Package: pxweb
 Title: R Interface to PXWEB APIs
-Version: 0.16.2
-Date: 2022-10-31
+Version: 0.17.0
+Date: 2024-01-28
 Authors@R: c(
     person("Mans", "Magnusson", , "mons.magnusson@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-0296-2719")),
@@ -33,15 +33,16 @@ URL: https://github.com/rOpenGov/pxweb/,
         https://github.com/rOpenGov/pxweb
 BugReports: https://github.com/rOpenGov/pxweb/issues
 Depends: R (>= 3.5.0)
-Imports: checkmate, httr (>= 1.1), jsonlite
-Suggests: knitr, digest, remotes, rmarkdown, testthat (>= 0.11), xml2
+Imports: checkmate, curl, httr (>= 1.1), jsonlite
+Suggests: digest, httptest, knitr, remotes, rmarkdown, testthat (>=
+        0.11), xml2
 VignetteBuilder: knitr
 Encoding: UTF-8
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 X-schema.org-isPartOf: http://ropengov.org/
 X-schema.org-keywords: ropengov
 NeedsCompilation: no
-Packaged: 2022-10-31 12:02:10 UTC; mansmagnusson
+Packaged: 2024-01-28 12:57:36 UTC; manma760
 Author: Mans Magnusson [aut, cre] (<https://orcid.org/0000-0002-0296-2719>),
   Markus Kainu [aut],
   Janne Huovari [aut],
@@ -56,4 +57,4 @@ Author: Mans Magnusson [aut, cre] (<https://orcid.org/0000-0002-0296-2719>),
   Sebastian Ankargren [ctb]
 Maintainer: Mans Magnusson <mons.magnusson@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-10-31 13:05:00 UTC
+Date/Publication: 2024-01-29 08:50:02 UTC

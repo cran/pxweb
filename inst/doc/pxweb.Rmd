@@ -12,8 +12,57 @@ vignette: >
 ---
 
 
+```{r basecode, message=FALSE, eval=FALSE, echo=FALSE}
+# Below are code to run to setup the data
+
+# Get PXWEB levels
+px_levels <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+px_levels
+save(px_levels, file = "vignettes/px_levels_example.rda")
+
+# Get PXWEB metadata about a table
+px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
+px_meta
+save(px_meta, file = "vignettes/px_meta_example.rda")
+
+
+# Example Download
+pxweb_query_list <-
+  list(
+    "Civilstand" = c("*"), # Use "*" to select all
+    "Kon" = c("1", "2"),
+    "ContentsCode" = c("BE0101N1"),
+    "Tid" = c("2015", "2016", "2017")
+  )
+pxq <- pxweb_query(pxweb_query_list)
+
+pxd <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+save(pxd, file = "vignettes/pxd_example.rda")
+
+pxq$response$format <- "json-stat"
+pxjstat <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+save(pxjstat, file = "vignettes/pxjstat_example.rda")
+
+pxq$response$format <- "px"
+pxfp <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+save(pxfp, file = "vignettes/pxfp_example.rda")
+
+pxweb_cite_example <- capture.output(pxweb_cite(pxd))
+
+```
+
+
 This R package provides tools to access [PX-WEB
-API](https://pxnet2.stat.fi/API-description_SCB.pdf). Your
+API](https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/). Your
 [contributions](https://ropengov.org/community/) and [bug reports and other feedback](https://github.com/ropengov/pxweb) are
 welcome!
 
@@ -30,8 +79,8 @@ The `pxweb` R package connects any PXWEB API to R and facilitates the access, us
 
 [A number of organizations](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/) use PXWEB to distribute hierarchical data. You can browse the available data sets at:
 
- * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](https://pxnet2.stat.fi/API-description_SCB.pdf)
- * [Statistics Finland](https://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://pxnet2.stat.fi/api1.html)
+ * [Statistics Sweden](http://www.statistikdatabasen.scb.se/pxweb/en/ssd/) with [API Description](https://www.scb.se/en/services/open-data-api/api-for-the-statistical-database/)
+ * [Statistics Finland](https://tilastokeskus.fi/til/aihealuejako.html) [StatFi API Description](https://statfin.stat.fi/api1.html)
  * [Other organizations using PX-WEB](https://www.scb.se/en/services/statistical-programs-for-px-files/px-web/pxweb-examples/)
 
 ### About PXWEB APIs
@@ -73,7 +122,7 @@ vignette(topic="pxweb")
 We also recommend setting the UTF-8 encoding since each API may have local specific letters:
 
 ```{r locale, eval=FALSE}
-Sys.setlocale(locale="UTF-8") 
+Sys.setlocale(locale = "UTF-8")
 ```
 
 
@@ -123,19 +172,29 @@ Although, if the `pxweb` is installed again, it will overwrite the old API catal
 
 Under the hood, the pxweb package uses the `pxweb_get()` function to access data from the PXWEB API. It also keeps track of the API's time limits and splits big queries into optimal downloadable chunks. If we use `pxweb_get()` without a query, the function either returns a PXWEB LEVELS object or a PXWEB METADATA object. What is returned depends on if the URL points to a table in the API or not. Here is an example of a PXWEB LEVELS object.
 
-```{r levels, message=FALSE, eval=TRUE}
+```{r levels, message=FALSE, eval=FALSE}
 # Get PXWEB levels
 px_levels <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/")
+px_levels
+```
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+load("px_levels_example.rda")
 px_levels
 ```
 
 And if we use `pxweb_get()` for a table, a PXWEB METADATA object is returned.
 
-```{r meta, message=FALSE, eval=TRUE}
+```{r meta, message=FALSE, eval=FALSE}
 # Get PXWEB metadata about a table
 px_meta <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy")
 px_meta
 ```
+
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+load("px_meta_example.rda")
+px_meta
+```
+
 
 ### Creating data queries
 
@@ -213,11 +272,13 @@ pxq <- pxweb_query("path/to/the/json/query.json")
 Finally, we can create a PXWEB query from an R list where each list element is a variable and selected observation.
 
 ```{r rquery, message=FALSE, eval=TRUE}
-pxweb_query_list <- 
-  list("Civilstand"=c("*"), # Use "*" to select all
-       "Kon"=c("1","2"),
-       "ContentsCode"=c("BE0101N1"),
-       "Tid"=c("2015","2016","2017"))
+pxweb_query_list <-
+  list(
+    "Civilstand" = c("*"), # Use "*" to select all
+    "Kon" = c("1", "2"),
+    "ContentsCode" = c("BE0101N1"),
+    "Tid" = c("2015", "2016", "2017")
+  )
 pxq <- pxweb_query(pxweb_query_list)
 pxq
 ```
@@ -232,27 +293,48 @@ pxweb_validate_query_with_metadata(pxq, px_meta)
 
 When we have the URL to a data table and a query, we can download the data with "`pxweb_get()` ". The function returns a `pxweb_data` object that contains the downloaded data.
 
-```{r, message=FALSE, eval=TRUE}
-pxd <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                 pxq)
+```{r, message=FALSE, eval=FALSE}
+pxd <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+pxd
+```
+
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+load("pxd_example.rda")
 pxd
 ```
 
 If we instead want a JSON-stat object, we change the response format to JSON-stat, and we will get a JSON-stat object returned. 
 
-```{r, message=FALSE, eval=TRUE}
+```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "json-stat"
-pxjstat <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                     pxq)
+pxjstat <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+pxjstat
+```
+
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+load("pxjstat_example.rda")
 pxjstat
 ```
 
 Some return formats return files. Then, these responses are stored in the R `tempdir()` folded, and the file paths are returned by `pxweb_get()`. Currently, `px` and `sdmx` formats can be downloaded as files, but file an issue if you need other response formats.
 
-```{r, message=FALSE, eval=TRUE}
+```{r, message=FALSE, eval=FALSE}
 pxq$response$format <- "px"
-pxfp <- pxweb_get("https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
-                     pxq)
+pxfp <- pxweb_get(
+  "https://api.scb.se/OV0104/v1/doris/en/ssd/BE/BE0101/BE0101A/BefolkningNy",
+  pxq
+)
+pxfp
+```
+
+```{r , message=FALSE, eval=TRUE, echo=FALSE}
+load("pxfp_example.rda")
 pxfp
 ```
 
@@ -299,8 +381,13 @@ as.data.frame(pxdc)
 
 Finally, if we use the data, we can easily create a citation for a `pxweb_data` object using the `pxweb_cite()` function. For full reproducibility, please also cite the package.
 
-```{r, message=FALSE, eval=TRUE}
+```{r, message=FALSE, eval=FALSE}
 pxweb_cite(pxd)
+```
+
+```{r, message=FALSE, eval=TRUE, echo=FALSE}
+load("pxweb_cite_example.rda")
+cat(pxweb_cite_example, sep = "\n")
 ```
 
 
